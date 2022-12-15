@@ -3,8 +3,7 @@ import React from "react";
 import styles from "./AddComment.module.scss";
 
 import TextField from "@mui/material/TextField";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
+import { Avatar, Button } from "@mui/material";
 
 export const Index = () => {
   return (
@@ -22,7 +21,7 @@ export const Index = () => {
             multiline
             fullWidth
           />
-          <Button variant="contained">Отправить</Button>
+          <Button variant="contained">Publish</Button>
         </div>
       </div>
     </>

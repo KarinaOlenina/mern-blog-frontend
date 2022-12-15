@@ -1,7 +1,7 @@
 import React from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Grid from "@mui/material/Grid";
+
+import { Tabs, Tab, Grid, Box, Typography } from "@mui/material";
+import PropTypes from "prop-types";
 
 import { CommentsBlock, Post, TagsBlock } from "../components";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,13 +11,8 @@ import {
   fetchPosts,
   fetchTags,
 } from "../redux/slices/posts";
-import { logout } from "../redux/slices/auth";
-
-//
-import PropTypes from "prop-types";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-//
+import { useParams } from "react-router-dom";
+import axios from "../axios";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,32 +51,24 @@ export const Home = () => {
   const userData = useSelector((state) => state.auth.data);
   const { posts, tags } = useSelector((state) => state.posts);
 
-  console.log(posts);
-
-  const [isNew, setIsNew] = React.useState(true);
-
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const handleClick = () => {
-    setIsNew(!isNew);
-  };
-
   const isPostsLoading = posts.status === "loading";
   const isTagsLoading = tags.status === "loading";
 
   React.useEffect(() => {
-    if (isNew) {
+    if (value === 0) {
       dispatch(fetchNewPosts());
       dispatch(fetchTags());
     } else {
       dispatch(fetchMostPopularPosts());
       dispatch(fetchTags());
     }
-  }, [isNew]);
+  }, [value]);
 
   return (
     <>
@@ -93,8 +80,8 @@ export const Home = () => {
             value={value}
             aria-label="basic tabs example"
           >
-            <Tab onClick={handleClick} label="New" {...a11yProps(0)} />
-            <Tab onClick={handleClick} label="Popular" {...a11yProps(1)} />
+            <Tab label="New" {...a11yProps(0)} />
+            <Tab label="Popular" {...a11yProps(1)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
