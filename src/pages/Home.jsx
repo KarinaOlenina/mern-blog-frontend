@@ -103,7 +103,7 @@ export const Home = () => {
                       author={obj.author}
                       createdAt={obj.createdAt}
                       viewsCount={obj.viewsCount}
-                      commentsCount={3}
+                      commentsCount={obj.comments.length}
                       tags={obj.tags}
                       isEditable={userData?._id === obj.author._id}
                     />
@@ -112,25 +112,6 @@ export const Home = () => {
             </Grid>
             <Grid xs={4} item>
               <TagsBlock items={tags.items} isLoading={isTagsLoading} />
-              <CommentsBlock
-                items={[
-                  {
-                    user: {
-                      fullName: "Olivia Adamson",
-                      avatarUrl: "https://mui.com/static/images/avatar/3.jpg",
-                    },
-                    text: "This is a test comment.",
-                  },
-                  {
-                    user: {
-                      fullName: "Amelia Evans",
-                      avatarUrl: "https://mui.com/static/images/avatar/4.jpg",
-                    },
-                    text: "When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top",
-                  },
-                ]}
-                isLoading={false}
-              />
             </Grid>
           </Grid>
         </TabPanel>

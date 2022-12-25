@@ -13,7 +13,6 @@ import styles from "./Post.module.scss";
 import { UserInfo } from "../UserInfo";
 import { PostSkeleton } from "./Skeleton";
 import { fetchRemovePost } from "../../redux/slices/posts";
-import { logout } from "../../redux/slices/auth";
 
 export const Post = ({
   _id,

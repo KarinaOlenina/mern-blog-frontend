@@ -2,12 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import axios from "../axios";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchMostPopularPosts,
-  fetchNewPosts,
-  fetchPosts,
-  fetchTags,
-} from "../redux/slices/posts";
+import { fetchPosts } from "../redux/slices/posts";
 import { Post } from "../components";
 
 export const PostByTags = () => {
@@ -48,12 +43,12 @@ export const PostByTags = () => {
 
   return (
     <>
+      <h1>{`#${tag}`}</h1>
       {(isPostsLoading ? [...Array(5)] : data).map((obj, index) =>
         isPostsLoading ? (
           <Post key={index} isLoading={true} />
         ) : (
           <>
-            <h1>{`#${tag}`}</h1>
             <Post
               key={obj._id}
               _id={obj._id}

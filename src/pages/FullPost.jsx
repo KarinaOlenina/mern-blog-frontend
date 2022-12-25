@@ -1,11 +1,14 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import { CommentsBlock, Index, Post } from "../components";
+import { CommentsBlock, Post } from "../components";
 import axios from "../axios";
 import ReactMarkdown from "react-markdown";
+import { useSelector } from "react-redux";
+import comments from "../redux/store";
 
 export const FullPost = () => {
+  const comment = useSelector((state) => state.comments.data);
   const [data, setData] = React.useState();
   const [isLoading, setIsLoading] = React.useState(true);
   const { id } = useParams();
@@ -21,7 +24,7 @@ export const FullPost = () => {
         console.warn(err);
         alert("Error getting article");
       });
-  }, []);
+  }, [comment]);
 
   if (isLoading) {
     return <Post isLoading={isLoading} isFullPost />;
@@ -36,33 +39,26 @@ export const FullPost = () => {
         author={data.author}
         createdAt={data.createdAt}
         viewsCount={data.viewsCount}
-        commentsCount={3}
+        commentsCount={data.comments.length}
         tags={data.tags}
         isFullPost
       >
         <ReactMarkdown children={data.text} />
       </Post>
+
       <CommentsBlock
-        items={[
-          {
+        items={
+          data["comments"] &&
+          data["comments"].map((comment) => ({
             user: {
-              fullName: "Olivia Adamson",
-              avatarUrl: "https://mui.com/static/images/avatar/3.jpg",
+              fullName: comment["author"].fullName,
+              avatarUrl: comment["author"].avatarUrl || "",
             },
-            text: "This is a test comment.",
-          },
-          {
-            user: {
-              fullName: "Amelia Evans",
-              avatarUrl: "https://mui.com/static/images/avatar/4.jpg",
-            },
-            text: "When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top",
-          },
-        ]}
+            text: comment.content,
+          }))
+        }
         isLoading={false}
-      >
-        <Index />
-      </CommentsBlock>
+      ></CommentsBlock>
     </>
   );
 };

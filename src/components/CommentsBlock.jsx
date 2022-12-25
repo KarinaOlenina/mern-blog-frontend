@@ -8,10 +8,12 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import Skeleton from "@mui/material/Skeleton";
+import { Index } from "./AddComment";
 
 export const CommentsBlock = ({ items, children, isLoading = true }) => {
   return (
     <SideBlock title="Comments">
+      <Index />
       <List>
         {(isLoading ? [...Array(5)] : items).map((obj, index) => (
           <React.Fragment key={index}>
