@@ -3,7 +3,7 @@ import React from "react";
 import { Tabs, Tab, Grid, Box, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 
-import { CommentsBlock, Post, TagsBlock } from "../components";
+import { Post, TagsBlock } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchMostPopularPosts,
@@ -143,25 +143,6 @@ export const Home = () => {
             </Grid>
             <Grid xs={4} item>
               <TagsBlock items={tags.items} isLoading={isTagsLoading} />
-              <CommentsBlock
-                items={[
-                  {
-                    user: {
-                      fullName: "Olivia Adamson",
-                      avatarUrl: "https://mui.com/static/images/avatar/3.jpg",
-                    },
-                    text: "This is a test comment.",
-                  },
-                  {
-                    user: {
-                      fullName: "Amelia Evans",
-                      avatarUrl: "https://mui.com/static/images/avatar/4.jpg",
-                    },
-                    text: "When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top",
-                  },
-                ]}
-                isLoading={false}
-              />
             </Grid>
           </Grid>
         </TabPanel>

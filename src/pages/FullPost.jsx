@@ -47,6 +47,7 @@ export const FullPost = () => {
       </Post>
 
       <CommentsBlock
+        imageUrl={data.author.avatarUrl}
         items={
           data["comments"] &&
           data["comments"].map((comment) => ({
